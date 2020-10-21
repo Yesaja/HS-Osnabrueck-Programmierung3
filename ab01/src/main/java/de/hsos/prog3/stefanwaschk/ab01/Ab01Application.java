@@ -9,7 +9,6 @@ import java.util.HashSet;
 public class Ab01Application {
 
 	public static void main(String[] args) {
-		//SpringApplication.run(Ab01Application.class, args);
 		HashSet<Nachbar> set = new HashSet<Nachbar>();
 		Nachbar finn = new Nachbar("Finn","Reinhardt");
 		Nachbar paul = new Nachbar("Paul", "Dieterich");
