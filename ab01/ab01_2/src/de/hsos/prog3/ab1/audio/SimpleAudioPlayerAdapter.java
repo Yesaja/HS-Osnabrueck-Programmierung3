@@ -8,7 +8,7 @@ import java.net.URL;
 public class SimpleAudioPlayerAdapter implements StdAudioPlayer {
     private SimpleAudioPlayer player;
     @Override
-    public void einmaligAbspeichern(URL url) throws IOException {
+    public void einmaligAbspeilen(URL url) throws IOException {
         if(player == null)
             player = new SimpleAudioPlayer(url);
         player.play(0);
@@ -17,7 +17,7 @@ public class SimpleAudioPlayerAdapter implements StdAudioPlayer {
     @Override
     public void wiederholtAbspeilen(URL url, int wiederholungen) throws IOException {
         for (int i = 0; i <= wiederholungen ; i++) {
-            einmaligAbspeichern(url);
+            einmaligAbspeilen(url);
         }
     }
 
