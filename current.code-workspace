@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.dependency.packagePresentation": "hierarchical",
+		"java.project.referencedLibraries": [
+			"library/**/*.jar",
+			"lib/**/*.jar",
+			"F:\\Git\\HS-Osnabrueck-Programmierung3\\ab01\\ab01_2\\lib\\SimpleAudioPlayer.jar",
+			"ab01/ab01_2/lib/SimpleAudioPlayer.jar",
+			"de/hsos/prog3/ab01/ab01_2/lib/SimpleAudioPlayer.jar"
+		]
+	}
+}
