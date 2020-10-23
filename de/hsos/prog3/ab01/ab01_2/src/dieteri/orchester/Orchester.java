@@ -41,4 +41,9 @@ public class Orchester {
     public void spielen() {
         verhalten.spielen(this);
     }
+
+    @Override
+    public String toString() {
+        return "Es spielt für Sie das Orchester " + bezeichnung + " unter der Leitung von " + dirigentIn + " mit den Musikern " + musikerInnen;
+    }
 }
