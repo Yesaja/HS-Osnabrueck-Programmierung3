@@ -1,4 +1,4 @@
-package src.dieteri.ab01;
+package src.dieteri.orchester;
 
 import de.hsos.prog3.audio.SimpleAudioPlayer;
 
