@@ -13,6 +13,7 @@ public class Orchester {
     public Orchester(String bezeichnung, String audioDateiKonzert) {
         this.bezeichnung = bezeichnung;
         this.audioDateiKonzert = audioDateiKonzert;
+        this.musikerInnen = new HashSet<MusikerIn>();
     }
     
     public void addDirigentIn(DirigentIn dirigentIn) {
@@ -28,7 +29,6 @@ public class Orchester {
     }
 
     public URL getAudiodateiKonzert() { 
-        //laut Aufgabenblatt URL?
         return App.class.getResource(audioDateiKonzert);
     }
 

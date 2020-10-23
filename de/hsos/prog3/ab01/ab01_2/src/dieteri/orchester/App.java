@@ -15,24 +15,27 @@ public class App {
     public static void main(String[] args) throws IOException {
         String audioDatei = "/All_Together.wav";
         Orchester orchester = new Orchester("HSOS Nipple Twister Orchestra", audioDatei);
-        DirigentIn Rosmann = new DirigentIn("Rosmann");
+        DirigentIn Roosmann = new DirigentIn("Roosmann");
 
         MusikerIn trompete = new MusikerIn("Susi Sorglos", Instrument.SAXOPHON);
         MusikerIn akkordion = new MusikerIn("Akki Taste", Instrument.AKKORDION);
         MusikerIn drum = new MusikerIn("Spider Swen", Instrument.SCHLAGZEUG);
         
-        orchester.addDirigentIn(Rosmann);
+        orchester.addDirigentIn(Roosmann);
         orchester.addMusikerIn(trompete);
         orchester.addMusikerIn(akkordion);
         orchester.addMusikerIn(drum);
 
         orchester.proben(orchester);
         orchester.auftreten(orchester);
-
+        
+        orchester.spielen();
+        /*
         try { 
             orchester.spielen();
         } catch(IOException e) {
             e.printStackTrace();
         }
+        */
     }
 }
