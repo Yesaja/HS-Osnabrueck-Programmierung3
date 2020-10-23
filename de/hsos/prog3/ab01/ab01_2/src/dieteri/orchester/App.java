@@ -13,7 +13,7 @@ import src.dieteri.orchester.Orchester;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        String audioDatei = "/All_Together.wav";
+        String audioDatei = "/res/All_Together.wav";
         Orchester orchester = new Orchester("HSOS Nipple Twister Orchestra", audioDatei);
         DirigentIn Roosmann = new DirigentIn("Roosmann");
 
@@ -26,7 +26,7 @@ public class App {
         orchester.addMusikerIn(akkordion);
         orchester.addMusikerIn(drum);
 
-        orchester.proben(orchester);
+        //orchester.proben(orchester);
         orchester.auftreten(orchester);
         
         orchester.spielen();

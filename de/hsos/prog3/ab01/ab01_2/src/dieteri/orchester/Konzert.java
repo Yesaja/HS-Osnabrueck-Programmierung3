@@ -6,10 +6,11 @@ import src.dieteri.audio.StdAudioPlayer;
 import src.dieteri.audio.adapter.SimpleAudioPlayerAdapter;
 
 public class Konzert implements Verhalten {
-    public void spielen(Orchester orchester){
-        if(orchester.getMusikerInnen() != null){
+    public void spielen(Orchester orchester) {
+        if(orchester.getMusikerInnen() != null) {
                 StdAudioPlayer pAdapter = new SimpleAudioPlayerAdapter();
                 try {
+                    pAdapter.tonAus();
                     pAdapter.einmaligAbspielen(orchester.getAudiodateiKonzert());
                 } catch(IOException e) {
                     e.printStackTrace();

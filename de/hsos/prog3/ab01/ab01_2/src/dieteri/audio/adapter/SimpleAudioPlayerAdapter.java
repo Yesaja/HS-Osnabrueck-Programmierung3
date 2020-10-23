@@ -26,7 +26,7 @@ public class SimpleAudioPlayerAdapter implements src.dieteri.audio.StdAudioPlaye
         if(player != null){
             player.setDebug(true);
             player.verboseLogging(true);
-            System.out.println("Ton wurde Ausgeschaltet");
+            System.out.println("Ton wurde ausgeschaltet");
         }
     }
 
