@@ -1,9 +1,9 @@
 package src.dieteri.audio.adapter;
 
-import de.hsos.prog3.audio.SimpleAudioPlayer;
-
 import java.io.IOException;
 import java.net.URL;
+
+import de.hsos.prog3.audio.SimpleAudioPlayer;
 
 public class SimpleAudioPlayerAdapter implements src.dieteri.audio.StdAudioPlayer {
     private SimpleAudioPlayer player;
