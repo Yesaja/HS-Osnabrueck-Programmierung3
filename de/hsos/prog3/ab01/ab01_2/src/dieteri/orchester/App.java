@@ -1,7 +1,9 @@
+package src.dieteri.orchester;
+
 import java.io.IOException;
 import java.net.URL;
 
-import org.graalvm.compiler.asm.aarch64.AArch64Assembler.Instruction;
+//import org.graalvm.compiler.asm.aarch64.AArch64Assembler.Instruction;
 
 import de.hsos.prog3.audio.SimpleAudioPlayer;
 import src.dieteri.orchester.DirigentIn;
@@ -16,7 +18,7 @@ public class App {
 
         MusikerIn trompete = new MusikerIn("Susi Sorglos", Instrument.SAXOPHON);
         MusikerIn akkordion = new MusikerIn("Akki Taste", Instrument.AKKORDION);
-        MusikerIn drum = new MusikerIn("Speider Swen", Instruction.SCHLAGZEUG);
+        MusikerIn drum = new MusikerIn("Spider Swen", Instrument.SCHLAGZEUG);
         
         orchester.addDirigentIn(Rosmann);
         orchester.addMusikerIn(trompete);
@@ -24,11 +26,11 @@ public class App {
         orchester.addMusikerIn(drum);
 
         orchester.proben(orchester);
-        orchester.konzert(orchester);
+        orchester.auftreten(orchester);
 
-        try{ 
+        try { 
             orchester.spielen();
-        }catch(IOException e){
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
