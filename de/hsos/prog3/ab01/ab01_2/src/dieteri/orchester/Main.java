@@ -1,5 +1,5 @@
 package src.dieteri.orchester;
-
+/**
 import de.hsos.prog3.audio.SimpleAudioPlayer;
 
 import java.io.IOException;
@@ -15,3 +15,4 @@ public class Main {
         player.play(0);
     }
 }
+*/
