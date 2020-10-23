@@ -29,7 +29,7 @@ public class Orchester {
 
     public URL getAudiodateiKonzert() { 
         //laut Aufgabenblatt URL?
-        return Main.class.getResource(audioDateiKonzert);
+        return App.class.getResource(audioDateiKonzert);
     }
 
     public void proben(Orchester orchester) {
