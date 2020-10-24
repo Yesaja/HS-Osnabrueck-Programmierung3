@@ -1,3 +1,5 @@
+/*
+
 package src.dieteri.orchester;
 
 import java.io.IOException;
@@ -24,3 +26,4 @@ public class Probe implements Verhalten {
         }
     }
 }
+*/
