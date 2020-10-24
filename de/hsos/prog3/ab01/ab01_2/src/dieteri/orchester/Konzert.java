@@ -1,3 +1,4 @@
+/*
 package src.dieteri.orchester;
 
 import java.io.IOException;
@@ -23,3 +24,4 @@ public class Konzert implements Verhalten {
     
     
 }
+*/
