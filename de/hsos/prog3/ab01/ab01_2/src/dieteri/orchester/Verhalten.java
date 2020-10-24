@@ -1,5 +1,5 @@
 package src.dieteri.orchester;
 
-public interface Verhalten{
+public interface Verhalten {
     void spielen(Orchester orchester);
 }
