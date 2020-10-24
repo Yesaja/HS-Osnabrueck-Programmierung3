@@ -26,16 +26,9 @@ public class App {
         orchester.addMusikerIn(akkordion);
         orchester.addMusikerIn(drum);
 
-        //orchester.proben(orchester);
-        orchester.auftreten(orchester);
+        orchester.proben(orchester);
+        //orchester.auftreten(orchester);
         
         orchester.spielen();
-        /*
-        try { 
-            orchester.spielen();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 }
