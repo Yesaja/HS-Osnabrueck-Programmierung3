@@ -1,7 +1,11 @@
 package src.dieteri.orchester;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
+
+import src.dieteri.audio.StdAudioPlayer;
+import src.dieteri.audio.adapter.SimpleAudioPlayerAdapter;
 
 public class Orchester {
     private String bezeichnung;
@@ -51,5 +55,41 @@ public class Orchester {
         return "Es spielt das Orchester " + bezeichnung + " unter der Leitung von " + dirigentIn + " und den Musikern " + musikerInnen;
     }
 
+
+    //inner class Probe of Orchester
+    private class Probe implements Verhalten{
+        public void spielen(Orchester orchester) {
+            if(orchester.getMusikerInnen() != null) {
+                for(MusikerIn m : orchester.getMusikerInnen()) {
+                    StdAudioPlayer pAdapter = new SimpleAudioPlayerAdapter();
+                    try {
+                        pAdapter.tonAus();
+                        pAdapter.einmaligAbspielen(App.class.getResource(m.getInstrument().getAudio()));
+                    } catch(IOException e) {
+                    e.printStackTrace();
+                    //e.getMessage();
+                    System.out.println("Probe wird abgebrochen!");
+                    }
+                }
+            }
+        }
+    }
+     //inner class Konzert of Orchester
+    private class Konzert implements Verhalten{
+        public void spielen(Orchester orchester) {
+            if(orchester.getMusikerInnen() != null) {
+                    StdAudioPlayer pAdapter = new SimpleAudioPlayerAdapter();
+                    try {
+                        pAdapter.tonAus();
+                        pAdapter.einmaligAbspielen(orchester.getAudiodateiKonzert());
+                    } catch(IOException e) {
+                        e.printStackTrace();
+                        //e.getMessage();
+                        System.out.println("Probe wird abgebrochen");
+                    }
+                
+            }
+        }
+    }
     
 }
