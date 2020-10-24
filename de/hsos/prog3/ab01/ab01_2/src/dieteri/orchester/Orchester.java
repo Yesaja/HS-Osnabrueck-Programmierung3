@@ -36,12 +36,12 @@ public class Orchester {
         return App.class.getResource(audioDateiKonzert);
     }
 
-    public void proben(Orchester orchester) {
+    public void proben() {
         //setzt ein Objekt vom Typ Probe für die Instanzvariable verhalten
         verhalten = new Probe();
     }
 
-    public void auftreten(Orchester orchester) {
+    public void auftreten() {
         //setzt ein Objekt vom Typ Auftritt für die Instanzvariable verhalten
         verhalten = new Konzert();
     }
