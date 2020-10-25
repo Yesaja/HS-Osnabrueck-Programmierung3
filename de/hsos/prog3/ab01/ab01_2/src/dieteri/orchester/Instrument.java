@@ -1,7 +1,7 @@
 package src.dieteri.orchester;
 
 enum Instrument {
-    SAXOPHON("Baritone.wav"), SCHLAGZEUG("Drum.wav"), AKKORDION("Accordeon.wav");
+    SAXOPHON("/res/Baritone.wav"), SCHLAGZEUG("/res/Drum.wav"), AKKORDION("/res/Accordion.wav");
     private String audiodatei;
 
     Instrument(String audiodatei) {

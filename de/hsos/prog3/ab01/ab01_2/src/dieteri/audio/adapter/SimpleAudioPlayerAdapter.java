@@ -1,9 +1,9 @@
 package src.dieteri.audio.adapter;
 
-import de.hsos.prog3.audio.SimpleAudioPlayer;
-
 import java.io.IOException;
 import java.net.URL;
+
+import de.hsos.prog3.audio.SimpleAudioPlayer;
 
 public class SimpleAudioPlayerAdapter implements src.dieteri.audio.StdAudioPlayer {
     private SimpleAudioPlayer player;
@@ -26,7 +26,7 @@ public class SimpleAudioPlayerAdapter implements src.dieteri.audio.StdAudioPlaye
         if(player != null){
             player.setDebug(true);
             player.verboseLogging(true);
-            System.out.println("Ton wurde Ausgeschaltet");
+            System.out.println("Ton wurde ausgeschaltet");
         }
     }
 
