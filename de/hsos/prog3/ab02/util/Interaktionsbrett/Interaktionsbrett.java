@@ -10,6 +10,7 @@
  * 1.02: Methoden abwischen() und zuruecksetzen(), das urspruengliche
  *       abwischen() voneinander getrennt
  */
+package ab02.util; 
 
 import java.awt.BorderLayout;
 import java.awt.Color;
