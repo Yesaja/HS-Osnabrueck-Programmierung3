@@ -1,4 +1,4 @@
-package src.de.hsos.prog3.dieteri.ab01;
+package src.dieteri.ab01;
 
 import java.util.*;
 

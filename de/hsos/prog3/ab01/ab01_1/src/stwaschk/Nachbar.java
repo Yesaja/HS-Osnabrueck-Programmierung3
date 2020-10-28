@@ -1,4 +1,4 @@
-package src.de.hsos.prog3.stwaschk;
+package src.stwaschk;
 
 public class Nachbar {
     private String vorname;

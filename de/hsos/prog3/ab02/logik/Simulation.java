@@ -1,7 +1,7 @@
 package logik;
 
 public interface Simulation {
-    void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlihckeitDerBesiedlung);
+    void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlichkeitDerBesiedlung);
     void berechneFolgeGeneration(int berechnungsschritte);
-    void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAnederung);
+    void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung);
 }

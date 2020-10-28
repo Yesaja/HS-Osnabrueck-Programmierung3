@@ -1,6 +1,5 @@
 package logik;
 
 public interface BeiAenderung {
-    void akualisiere(boolean[][] neu);    
-
+    void akualisiere(boolean[][] neu);
 }

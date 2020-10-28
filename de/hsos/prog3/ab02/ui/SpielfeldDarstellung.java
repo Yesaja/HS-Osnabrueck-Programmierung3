@@ -1,6 +1,6 @@
-package ab02.ui;
+package ui;
 
-import ab02.util.Interaktionsbrett;
+import util.Interaktionsbrett;
 
 class SpielfeldDarstellung {
     private Interaktionsbrett ib;
