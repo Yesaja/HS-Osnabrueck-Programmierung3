@@ -1,5 +1,5 @@
-package ab02.ui;
-import ab02.util.EinUndAusgabe;
+package ui;
+import util.EinUndAusgabe;
 
 public class NutzerEingabe {
     
