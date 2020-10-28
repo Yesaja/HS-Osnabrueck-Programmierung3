@@ -1,4 +1,4 @@
-package ab02.logik;
+package logik;
 
 public interface BeiAenderung {
     void akualisiere(boolean[][] neu);    
