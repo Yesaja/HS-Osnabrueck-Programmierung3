@@ -23,8 +23,28 @@ public class Simulator implements Simulation {
 
     @Override
     public void berechneFolgeGeneration(int berechnungsschritte) {
-        // TODO Auto-generated method stub
+        
 
+
+        for(int zeile = 0; zeile < this.anzahlFelder; zeile++) {
+            for(int spalte = 0; spalte < this.anzahlFelder; spalte++) {
+                boolean obenLinks = spielfeld[zeile-1][spalte-1];
+                boolean obenMitte = spielfeld[zeile-1][spalte];
+                boolean obenRechts = spielfeld[zeile-1][spalte+1];
+
+                boolean mitteLinks = spielfeld[zeile][spalte-1];
+                boolean mitte = spielfeld[zeile][spalte];
+                boolean mitteRechts = spielfeld[zeile][spalte+1];
+
+                boolean untenLinks = spielfeld[zeile+1][spalte-1];
+                boolean untenMitte = spielfeld[zeile+1][spalte];
+                boolean untenRechts = spielfeld[zeile+1][spalte+1];
+
+            }
+        }
+       //1. jede bewohnte Zelle mit genau {2,3} bewohnten Nachbarn = bleibt bewohnt
+       //2. jede unbewohnte Zelle mit genau {3} bewohnten Nachbarn = wird bewohnt
+       //3. jede Zelle hat [3,8] Nachbarn (min=Ecke, max=Mitte)
     }
 
     @Override
