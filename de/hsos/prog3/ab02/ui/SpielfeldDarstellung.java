@@ -11,7 +11,7 @@ class SpielfeldDarstellung {
         this.ib = ib;
     }
 
-    SpielfeldDarstellung(boolean[][] spielfeld) {
+    public void spielfeldDarstellen(boolean[][] spielfeld) {
         int seitenlaenge = SEITENLAENGE_SPIELFELD / spielfeld.length;
         int x = MARGIN; 
         int y = MARGIN;
