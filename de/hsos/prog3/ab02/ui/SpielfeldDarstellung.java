@@ -7,15 +7,16 @@ class SpielfeldDarstellung {
     private final int SEITENLAENGE_SPIELFELD = 300;
     private final int MARGIN = 10;
     
-    SpielfeldDarstellung(Interaktionsbrett ib){
+    SpielfeldDarstellung(Interaktionsbrett ib) {
         this.ib = ib;
     }
-    SpielfeldDarstellung(boolean[][] spielfeld){
+
+    SpielfeldDarstellung(boolean[][] spielfeld) {
         int seitenlaenge = SEITENLAENGE_SPIELFELD / spielfeld.length;
         int x = MARGIN; 
         int y = MARGIN;
-        for(boolean[] a : spielfeld){
-            for(boolean b : a){
+        for(boolean[] a : spielfeld) {
+            for(boolean b : a) {
                 Quadrat quadrat = new Quadrat(x,y,seitenlaenge);
                 if(b) quadrat.darstellenFuellung(ib);
                 else quadrat.darstellenRahmen(ib);
@@ -26,7 +27,8 @@ class SpielfeldDarstellung {
             y += seitenlaenge;
         }
     }
-    public void abwischen(){
+
+    public void abwischen() {
         ib.abwischen();
     };
 }
