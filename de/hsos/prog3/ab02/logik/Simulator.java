@@ -93,13 +93,4 @@ public class Simulator implements Simulation {
         // TODO Auto-generated method stub
 
     }
-
-    private boolean nachbarCheck(boolean zelle) {
-        if(zelle) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
