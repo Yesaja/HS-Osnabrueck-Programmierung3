@@ -73,7 +73,7 @@ public class Simulator implements Simulation {
                     //Nachbarn rausgefunden, jetzt gucken, was wir damit machen
 
                     //Regel 1.
-                    if(!(mitte == true && bewohnteNachbarn == 2 || bewohnteNachbarn == 3)) {
+                    if(mitte == true && bewohnteNachbarn != 2 || bewohnteNachbarn != 3) {
                         mitte = false;
                     //Regel 2.
                     } else if(mitte == false && bewohnteNachbarn == 3) {
