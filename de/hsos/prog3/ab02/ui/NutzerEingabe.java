@@ -14,56 +14,58 @@ public class NutzerEingabe {
         int eingabe;
         String exept; 
         boolean x = false; 
-        do{
-            System.out.println("Bitte geben sie die anzahl der Zellen des Spielfeildes an");
+        do {
+            System.out.println("Bitte geben Sie die Anzahl der Zellen des Spielfeldes an");
             eingabe = io.leseInteger();
-            if(eingabe>=MIN_SPIELFELD){
-                System.out.println("Bitte bestätigen sie die eingabe von: " + eingabe + " (y) / (n)" );
+            if(eingabe>=MIN_SPIELFELD) {
+                System.out.println("Bitte bestätigen Sie die Eingabe von: " + eingabe + " (y) / (n)" );
                 exept = io.leseString();
-                if(exept == "y"){
+                if(exept == "y") {
                     return eingabe; 
-                }else{
+                } else {
                     x = true;
                 }
-            }else{
-                System.out.println("Die Eingegebene Zahl liegt under der mindestzahl von " + MIN_SPIELFELD);
-                System.out.println("Soll die mindestanzal genutzt werden? (y) / (n)" );
+            } else {
+                System.out.println("Die eingegebene Zahl liegt under der Mindestzahl von " + MIN_SPIELFELD);
+                System.out.println("Soll die Mindestanzahl genutzt werden? (y) / (n)" );
                     exept = io.leseString();
-                    if(exept == "y"){
+                    if(exept == "y") {
                         return MIN_SPIELFELD; 
-                    }else{
+                    } else {
                         x = true;
                     }
             }
-        }while(x);
-        
+        } while(x);
+        return -1; // Fehler, sollte nie erreicht werden
     }
     public int wahrscheinlichkeitDerBesiedlung(){
         int eingabe; 
         boolean x = false; 
-        do{
-            System.out.println("Geben sie eine prozentzahl ziwschen 1 und 100 an für die Besiedlung");
+        do {
+            System.out.println("Geben Sie eine Prozentzahl zwischen 1 und 100 für die Besiedlung an: ");
             eingabe = io.leseInteger();
             if(eingabe >= 1 && eingabe >= 100){
                 return eingabe;
-            }else{
+            } else {
                 x = true;
             }
-        }while(x);
-
+        } while(x);
+        return -1; // Fehler, sollte nie erreicht werden
     }
+
     public int anzahlDerSimulationsschitte(){
         int eingabe; 
         boolean x = false;
-        do{
-            System.out.println( "Geben sie die anzahl der Simulationsschritte an, \n" +
-                                "sie koennen waerend der berechnung nicht mit dem programm interagieren.");
+        do {
+            System.out.println( "Geben Sie die Anzahl der Simulationsschritte an, \n" +
+                                "Sie koennen waehrend der Berechnung nicht mit dem Programm interagieren.");
             eingabe = io.leseInteger();
             if(eingabe > 1){
                 return eingabe;
-            }else{
+            } else {
                 x = true;
             }
-        }while(x);
+        } while(x);
+        return -1; // Fehler, sollte nie erreicht werden
     }
 }
