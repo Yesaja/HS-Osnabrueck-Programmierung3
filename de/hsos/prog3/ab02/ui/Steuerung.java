@@ -21,18 +21,16 @@ public class Steuerung implements BeiAenderung {
             schritt = eingabe.anzahlDerSimulationsschitte();
             sim.berechneAnfangsGeneration(schritt, probability);
         }
-
     }
 
     public void initialisierung() {
         eingabe = new NutzerEingabe(new EinUndAusgabe());
         darstellung = new SpielfeldDarstellung(new Interaktionsbrett());
         sim.anmeldenFuerAktualisierungBeiAenderung(this);
-        
     }
 
     @Override
-    public void akualisiere(boolean[][] neueGeneration){
+    public void akualisiere(boolean[][] neueGeneration) {
         darstellung.abwischen();
         darstellung.spielfeldDarstellen(neueGeneration);
     }
