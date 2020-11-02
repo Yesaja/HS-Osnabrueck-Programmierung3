@@ -89,8 +89,5 @@ public class Simulator implements Simulation {
     }
 
     @Override
-    public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {
-        // TODO Auto-generated method stub
-
-    }
+    public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {}
 }
