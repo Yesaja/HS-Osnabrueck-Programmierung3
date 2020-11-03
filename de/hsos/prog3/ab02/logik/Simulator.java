@@ -1,4 +1,4 @@
-package logik;
+package de.hsos.prog3.ab02.logik;
 
 import java.util.Random;
 

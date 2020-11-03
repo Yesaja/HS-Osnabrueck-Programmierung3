@@ -11,7 +11,7 @@
  *       abwischen() voneinander getrennt
  */
 
-package util;
+package de.hsos.prog3.ab02.util;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
