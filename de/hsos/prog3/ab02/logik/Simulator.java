@@ -5,6 +5,7 @@ import java.util.Random;
 public class Simulator implements Simulation {
     private boolean[][] spielfeld; //bewohnt oder unbewohnt
     private int anzahlFelder;
+    private BeiAenderung beiAenderung;
 
     @Override
     public void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlichkeitDerBesiedlung) {
@@ -89,5 +90,7 @@ public class Simulator implements Simulation {
     }
 
     @Override
-    public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {}
+    public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {
+        this.beiAenderung = beiAenderung;
+    }
 }
