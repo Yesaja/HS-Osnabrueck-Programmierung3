@@ -9,6 +9,7 @@ public class Simulator implements Simulation {
 
     @Override
     public void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlichkeitDerBesiedlung) {
+        this.spielfeld = new boolean[anzahlDerZellen][anzahlDerZellen];
         this.anzahlFelder = anzahlDerZellen;
         spielfeld = new boolean[anzahlDerZellen][anzahlDerZellen];
         Random zufallszahl = new Random();
@@ -21,6 +22,8 @@ public class Simulator implements Simulation {
                 }
             }
         }
+
+        if(beiAenderung != null) {beiAenderung.akualisiere(spielfeld);}
     }
     
     @Override
@@ -40,7 +43,7 @@ public class Simulator implements Simulation {
                    if(anzahlNachbar < 3 ){ spielfeld[zeile][spalte] =  false; }                   
                 }
             }
-            if(beiAenderung != null){ beiAenderung.akualisiere(spielfeld);}
+            if(beiAenderung != null) {beiAenderung.akualisiere(spielfeld);}
             Thread.sleep(100);
         }
         
