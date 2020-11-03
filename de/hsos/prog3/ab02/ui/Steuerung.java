@@ -1,9 +1,9 @@
-package ui;
-import logik.Simulation;
-import logik.Simulator;
-import logik.BeiAenderung;
-import util.EinUndAusgabe;
-import util.Interaktionsbrett;
+package de.hsos.prog3.ab02.ui;
+import de.hsos.prog3.ab02.logik.Simulation;
+import de.hsos.prog3.ab02.logik.Simulator;
+import de.hsos.prog3.ab02.logik.BeiAenderung;
+import de.hsos.prog3.ab02.util.EinUndAusgabe;
+import de.hsos.prog3.ab02.util.Interaktionsbrett;
 
 public class Steuerung implements BeiAenderung {
  

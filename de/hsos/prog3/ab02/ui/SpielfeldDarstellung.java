@@ -1,6 +1,6 @@
-package ui;
+package de.hsos.prog3.ab02.ui;
 
-import util.Interaktionsbrett;
+import de.hsos.prog3.ab02.util.Interaktionsbrett;
 
 class SpielfeldDarstellung {
     private Interaktionsbrett ib;

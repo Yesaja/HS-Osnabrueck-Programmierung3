@@ -4,7 +4,7 @@
  * @author kleuker
  */
 
-package util;
+package de.hsos.prog3.ab02.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
