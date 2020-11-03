@@ -30,20 +30,20 @@ public class Simulator implements Simulation {
     public void berechneFolgeGeneration(int berechnungsschritte) throws InterruptedException { 
         int zeileLimit = spielfeld.length;
         int spalteLimit = spielfeld[0].length;
+        boolean[][] spielbrett = new boolean[zeileLimit][spalteLimit];
         for(int i = 0; i < berechnungsschritte; i++) {
-
             for(int zeile = 0; zeile < zeileLimit; zeile++) {
                 for(int spalte = 0; spalte < spalteLimit; spalte++) {
                     int anzahlNachbar = berechneNachbar(zeile,spalte);
 
                     //regeln
-                   if(anzahlNachbar >= 3 && !spielfeld[zeile][spalte]){ spielfeld[zeile][spalte] = true;}
-                   if(anzahlNachbar < 2){ spielfeld[zeile][spalte] =  false;}
+                   if(anzahlNachbar >= 3 && !spielfeld[zeile][spalte]){ spielbrett[zeile][spalte] = true;}
+                   if(anzahlNachbar < 2){ spielbrett[zeile][spalte] =  false;}
                    if(anzahlNachbar == 2 || anzahlNachbar == 3){ }
-                   if(anzahlNachbar < 3 ){ spielfeld[zeile][spalte] =  false; }                   
+                   if(anzahlNachbar < 3 ){ spielbrett[zeile][spalte] =  false; }                   
                 }
             }
-            if(beiAenderung != null) {beiAenderung.akualisiere(spielfeld);}
+            if(beiAenderung != null) {beiAenderung.akualisiere(spielbrett);}
             Thread.sleep(100);
         }
         
