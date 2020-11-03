@@ -10,6 +10,7 @@ public class Simulator implements Simulation {
     @Override
     public void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlichkeitDerBesiedlung) {
         this.anzahlFelder = anzahlDerZellen;
+        spielfeld = new boolean[anzahlDerZellen][anzahlDerZellen];
         Random zufallszahl = new Random();
         for(int zeile = 0; zeile < anzahlFelder / 2; zeile++) {
             for(int spalte = 0; spalte < anzahlFelder / 2; spalte++) {
@@ -21,7 +22,6 @@ public class Simulator implements Simulation {
             }
         }
     }
-
     
     @Override
     public void berechneFolgeGeneration(int berechnungsschritte) throws InterruptedException { 
