@@ -21,6 +21,8 @@ public class Simulator implements Simulation {
                 }
             }
         }
+
+        if(beiAenderung != null) {beiAenderung.akualisiere(spielfeld);}
     }
 
     
@@ -41,7 +43,7 @@ public class Simulator implements Simulation {
                    if(anzahlNachbar < 3 ){ spielfeld[zeile][spalte] =  false; }                   
                 }
             }
-            if(beiAenderung != null){ beiAenderung.akualisiere(spielfeld);}
+            if(beiAenderung != null) {beiAenderung.akualisiere(spielfeld);}
             Thread.sleep(100);
         }
         
