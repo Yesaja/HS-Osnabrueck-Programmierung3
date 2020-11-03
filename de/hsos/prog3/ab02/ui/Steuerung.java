@@ -1,5 +1,6 @@
 package ui;
 import logik.Simulation;
+import logik.Simulator;
 import logik.BeiAenderung;
 import util.EinUndAusgabe;
 import util.Interaktionsbrett;
@@ -26,6 +27,7 @@ public class Steuerung implements BeiAenderung {
     public void initialisierung() {
         eingabe = new NutzerEingabe(new EinUndAusgabe());
         darstellung = new SpielfeldDarstellung(new Interaktionsbrett());
+        sim = new Simulator();
         sim.anmeldenFuerAktualisierungBeiAenderung(this);
     }
 
