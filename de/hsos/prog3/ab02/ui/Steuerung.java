@@ -20,7 +20,7 @@ public class Steuerung implements BeiAenderung {
 
         while(schritt > 0){
             schritt = eingabe.anzahlDerSimulationsschitte();
-            sim.berechneFolgeGeneration(schritt, probability);
+            sim.berechneFolgeGeneration(schritt);
         }
     }
 

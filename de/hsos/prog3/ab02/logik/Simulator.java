@@ -30,8 +30,8 @@ public class Simulator implements Simulation {
     public void berechneFolgeGeneration(int berechnungsschritte) throws InterruptedException { 
         int zeileLimit = spielfeld.length;
         int spalteLimit = spielfeld[0].length;
-        boolean[][] spielbrett = new boolean[zeileLimit][spalteLimit];
         for(int i = 0; i < berechnungsschritte; i++) {
+            boolean[][] spielbrett = new boolean[zeileLimit][spalteLimit];
             for(int zeile = 0; zeile < zeileLimit; zeile++) {
                 for(int spalte = 0; spalte < spalteLimit; spalte++) {
                     int anzahlNachbar = berechneNachbar(zeile,spalte);
@@ -39,15 +39,13 @@ public class Simulator implements Simulation {
                     //regeln
                    if(anzahlNachbar >= 3 && !spielfeld[zeile][spalte]){ spielbrett[zeile][spalte] = true;}
                    if(anzahlNachbar < 2){ spielbrett[zeile][spalte] =  false;}
-                   if(anzahlNachbar == 2 || anzahlNachbar == 3){ }
                    if(anzahlNachbar < 3 ){ spielbrett[zeile][spalte] =  false; }                   
                 }
             }
+            this.spielfeld = spielbrett;
             if(beiAenderung != null) {beiAenderung.akualisiere(spielbrett);}
             Thread.sleep(100);
         }
-        
-
     }
 
     private int berechneNachbar(int x, int y){
@@ -65,6 +63,7 @@ public class Simulator implements Simulation {
         if(isNachbar(x+1, y+1)){nachbar++;}
         return nachbar;
     }
+    
     private boolean isNachbar(int x, int y){
         if(x < 0 || y < 0 || x >= spielfeld.length || y >=spielfeld[x].length){
             return false;
