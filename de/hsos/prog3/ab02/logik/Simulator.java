@@ -13,8 +13,8 @@ public class Simulator implements Simulation {
         this.anzahlFelder = anzahlDerZellen;
         spielfeld = new boolean[anzahlDerZellen][anzahlDerZellen];
         Random zufallszahl = new Random();
-        for(int zeile = 0; zeile < anzahlFelder / 2; zeile++) {
-            for(int spalte = 0; spalte < anzahlFelder / 2; spalte++) {
+        for(int zeile = 0; zeile < anzahlFelder; zeile++) {
+            for(int spalte = 0; spalte < anzahlFelder; spalte++) {
                 if(wahrscheinlichkeitDerBesiedlung > zufallszahl.nextInt(101)) {
                     this.spielfeld[zeile][spalte] = true;
                 } else {
@@ -32,8 +32,8 @@ public class Simulator implements Simulation {
         int spalteLimit = spielfeld[0].length;
         for(int i = 0; i < berechnungsschritte; i++) {
 
-            for(int zeile = 0; zeile < zeileLimit-1; zeile++) {
-                for(int spalte = 0; spalte < spalteLimit-1; spalte++) {
+            for(int zeile = 0; zeile < zeileLimit; zeile++) {
+                for(int spalte = 0; spalte < spalteLimit; spalte++) {
                     int anzahlNachbar = berechneNachbar(zeile,spalte);
 
                     //regeln
