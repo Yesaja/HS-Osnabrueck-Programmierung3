@@ -10,7 +10,7 @@ public class Simulator implements Simulation {
     @Override
     public void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlichkeitDerBesiedlung) {
         this.spielfeld = new boolean[anzahlDerZellen][anzahlDerZellen];
-        this.anzahlFelder = anzahlDerZellen;
+        this.anzahlFelder = anzahlDerZellen * 2;
         Random zufallszahl = new Random();
         for(int zeile = 0; zeile < anzahlFelder / 2; zeile++) {
             for(int spalte = 0; spalte < anzahlFelder / 2; spalte++) {
