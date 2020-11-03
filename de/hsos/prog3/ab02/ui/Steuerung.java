@@ -10,8 +10,8 @@ public class Steuerung implements BeiAenderung {
     private NutzerEingabe eingabe;
     private SpielfeldDarstellung darstellung;
 
-    public void startDesSpiels() {
-        int schritt = 0; 
+    public void startDesSpiels() throws InterruptedException {
+        int schritt = 1; 
         initialisierung();
         int zellen = eingabe.anzahlZellenDesSpielfelds();
         int probability = eingabe.wahrscheinlichkeitDerBesiedlung();
