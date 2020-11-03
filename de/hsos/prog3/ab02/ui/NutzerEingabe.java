@@ -7,7 +7,7 @@ public class NutzerEingabe {
     final int MIN_SIMULATIONSCHRITTE = 10;
     private EinUndAusgabe io;
 
-    NutzerEingabe(EinUndAusgabe io){
+    public NutzerEingabe(EinUndAusgabe io){
         this.io = io;
     }
     public int anzahlZellenDesSpielfelds(){
@@ -20,7 +20,7 @@ public class NutzerEingabe {
             if(eingabe>=MIN_SPIELFELD) {
                 System.out.println("Bitte bestätigen Sie die Eingabe von: " + eingabe + " (y) / (n)" );
                 exept = io.leseString();
-                if(exept == "y") {
+                if(exept.equals("y")) {
                     return eingabe; 
                 } else {
                     x = true;
@@ -29,7 +29,7 @@ public class NutzerEingabe {
                 System.out.println("Die eingegebene Zahl liegt under der Mindestzahl von " + MIN_SPIELFELD);
                 System.out.println("Soll die Mindestanzahl genutzt werden? (y) / (n)" );
                     exept = io.leseString();
-                    if(exept == "y") {
+                    if(exept.equals("y")) {
                         return MIN_SPIELFELD; 
                     } else {
                         x = true;
@@ -44,7 +44,7 @@ public class NutzerEingabe {
         do {
             System.out.println("Geben Sie eine Prozentzahl zwischen 1 und 100 für die Besiedlung an: ");
             eingabe = io.leseInteger();
-            if(eingabe >= 1 && eingabe >= 100){
+            if(eingabe >= 1 && eingabe <= 100){
                 return eingabe;
             } else {
                 x = true;
