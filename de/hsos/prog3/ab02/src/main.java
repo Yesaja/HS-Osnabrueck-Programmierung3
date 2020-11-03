@@ -1,4 +1,4 @@
-package de.hsos.prog3.ab02.src;
+/*package de.hsos.prog3.ab02.src;
 
 import de.hsos.prog3.ab02.ui.Steuerung;
 public class Main {
@@ -14,3 +14,4 @@ public class Main {
         
     }
 }
+*/
