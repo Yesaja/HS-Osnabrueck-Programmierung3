@@ -22,9 +22,54 @@ public class Simulator implements Simulation {
         }
     }
 
+    
     @Override
-    public void berechneFolgeGeneration(int berechnungsschritte) {
+    public void berechneFolgeGeneration(int berechnungsschritte) throws InterruptedException { 
+        int zeileLimit = spielfeld.length;
+        int spalteLimit = spielfeld[0].length;
+        for(int i = 0; i < berechnungsschritte; i++) {
+
+            for(int zeile = 0; zeile < zeileLimit-1; zeile++) {
+                for(int spalte = 0; spalte < spalteLimit-1; spalte++) {
+                    int anzahlNachbar = berechneNachbar(zeile,spalte);
+
+                    //regeln
+                   if(anzahlNachbar >= 3 && !spielfeld[zeile][spalte]){ spielfeld[zeile][spalte] = true;}
+                   if(anzahlNachbar < 2){ spielfeld[zeile][spalte] =  false;}
+                   if(anzahlNachbar == 2 || anzahlNachbar == 3){ }
+                   if(anzahlNachbar < 3 ){ spielfeld[zeile][spalte] =  false; }                   
+                }
+            }
+            if(beiAenderung != null){ beiAenderung.akualisiere(spielfeld);}
+            Thread.sleep(100);
+        }
         
+
+    }
+
+    private int berechneNachbar(int x, int y){
+        int nachbar = 0;
+        //oben
+        if(isNachbar(x-1, y-1)){nachbar++;}
+        if(isNachbar(x, y-1)){nachbar++;}
+        if(isNachbar(x+1, y-1)){nachbar++;}
+        //mitte
+        if(isNachbar(x-1, y)){nachbar++;}
+        if(isNachbar(x+1, y)){nachbar++;}
+        //unten
+        if(isNachbar(x-1, +-1)){nachbar++;}
+        if(isNachbar(x, y+1)){nachbar++;}
+        if(isNachbar(x+1, y+1)){nachbar++;}
+        return nachbar;
+    }
+    private boolean isNachbar(int x, int y){
+        if(x < 0 || y < 0 || x >= spielfeld.length || y >=spielfeld[x].length){
+            return false;
+        }
+        return spielfeld[x][y];
+    }
+        /*
+        public void berechneFolgeGeneration(int berechnungsschritte) {
         for(int i = 0; i < berechnungsschritte; i++) {
 
             //Grenzen des Spielfelds festhalten
@@ -88,6 +133,7 @@ public class Simulator implements Simulation {
        //2. jede unbewohnte Zelle mit genau {3} bewohnten Nachbarn = wird bewohnt
        //3. jede Zelle hat [3,8] Nachbarn (min=Ecke, max=Mitte)
     }
+    */
 
     @Override
     public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {
