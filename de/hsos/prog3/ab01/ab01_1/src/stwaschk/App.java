@@ -1,4 +1,4 @@
-package src.stwaschk;
+package de.hsos.prog3.ab01.ab01_1.src.stwaschk;
 
 import java.util.HashSet;
 

@@ -1,4 +1,4 @@
-package src;
+package de.hsos.prog3.ab02.src;
 
 import ui.Steuerung;
 public class Main {
