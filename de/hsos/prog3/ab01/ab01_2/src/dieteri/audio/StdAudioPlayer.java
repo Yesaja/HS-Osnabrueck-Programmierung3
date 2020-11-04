@@ -1,4 +1,4 @@
-package src.dieteri.audio;
+package de.hsos.prog3.ab01.ab01_2.src.dieteri.audio;
 
 import java.io.IOException;
 import java.net.URL;

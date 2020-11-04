@@ -1,4 +1,4 @@
-package src.dieteri.orchester;
+package de.hsos.prog3.ab01.ab01_2.src.dieteri.orchester;
 
 enum Instrument {
     SAXOPHON("/res/Baritone.wav"), SCHLAGZEUG("/res/Drum.wav"), AKKORDION("/res/Accordion.wav");
