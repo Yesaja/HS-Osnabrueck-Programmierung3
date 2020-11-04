@@ -1,11 +1,11 @@
-package src.dieteri.audio.adapter;
+package de.hsos.prog3.ab01.ab01_2.src.dieteri.audio.adapter;
 
 import java.io.IOException;
 import java.net.URL;
 
 import de.hsos.prog3.audio.SimpleAudioPlayer;
 
-public class SimpleAudioPlayerAdapter implements src.dieteri.audio.StdAudioPlayer {
+public class SimpleAudioPlayerAdapter implements de.hsos.prog3.ab01.ab01_2.src.dieteri.audio.StdAudioPlayer {
     private SimpleAudioPlayer player;
     @Override
     public void einmaligAbspielen(URL url) throws IOException {

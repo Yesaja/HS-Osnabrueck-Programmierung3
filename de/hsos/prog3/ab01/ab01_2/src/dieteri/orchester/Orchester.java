@@ -1,11 +1,11 @@
-package src.dieteri.orchester;
+package de.hsos.prog3.ab01.ab01_2.src.dieteri.orchester;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 
-import src.dieteri.audio.StdAudioPlayer;
-import src.dieteri.audio.adapter.SimpleAudioPlayerAdapter;
+import de.hsos.prog3.ab01.ab01_2.src.dieteri.audio.StdAudioPlayer;
+import de.hsos.prog3.ab01.ab01_2.src.dieteri.audio.adapter.SimpleAudioPlayerAdapter;
 
 public class Orchester {
     private String bezeichnung;
