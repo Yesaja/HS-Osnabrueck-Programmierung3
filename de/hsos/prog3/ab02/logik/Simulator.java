@@ -41,16 +41,12 @@ public class Simulator implements Simulation {
 
                     //1. jede bewohnte Zelle mit genau {2,3} bewohnten Nachbarn = bleibt bewohnt
                     //2. jede unbewohnte Zelle mit genau {3} bewohnten Nachbarn = wird bewohnt
-                    //3. jede Zelle hat [3,8] Nachbarn (min=Ecke, max=Mitte)
                     
                     if(anzahlNachbar == 2 || anzahlNachbar == 3) {
                         spielbrett[zeile][spalte] = true;
                     } else {
                         spielbrett[zeile][spalte] = false;
                     }
-                    /*if(spielfeld[zeile][spalte] && anzahlNachbar < 2 || anzahlNachbar > 3) {spielbrett[zeile][spalte] = false;}
-                    if(anzahlNachbar < 3 ) {spielbrett[zeile][spalte] = false;}                   
-                    if(!spielfeld[zeile][spalte] && anzahlNachbar == 3) {spielbrett[zeile][spalte] = true;}*/
                 }
             }
             this.spielfeld = spielbrett;
