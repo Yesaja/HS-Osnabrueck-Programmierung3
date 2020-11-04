@@ -60,8 +60,11 @@ public class NutzerEingabe {
             System.out.println( "Geben Sie die Anzahl der Simulationsschritte an, \n" +
                                 "Sie koennen waehrend der Berechnung nicht mit dem Programm interagieren.");
             eingabe = io.leseInteger();
-            if(eingabe > 1){
+            if(eingabe >= 1){
                 return eingabe;
+            } else if(eingabe < 1) {
+                System.out.println("Simulation wird beendet.");
+                return 0;
             } else {
                 x = true;
             }
