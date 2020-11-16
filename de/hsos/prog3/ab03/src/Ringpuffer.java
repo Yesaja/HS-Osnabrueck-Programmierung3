@@ -2,20 +2,37 @@ package de.hsos.prog3.ab03.src;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
+import java.util.*;
 
 public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
-    public ArrayList<T> elements;
-    int writePos;
-    int readPos;
-    int size;
-    int capacity;
-    boolean fixedCpacity;
-    boolean discarding;
+    private static class RingpufferInterator<E> implements Iterator<E>{
+        Ringpuffer<E> ringpuffer;
+        boolean first;
+        public RingpufferInterator(Ringpuffer<E> ringpuffer, boolean first){
+            this.ringpuffer = (Ringpuffer<E>) ringpuffer.clone();  //TODO: wie geht das richig?
+            this.first = first;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !ringpuffer.isEmpty();
+        }
+
+        @Override
+        public E next() {
+            //TODO: ringpuffer.poll wird nur zurucek gegeben damit es kein error gibt, muss noch koreet implmementiert werden.
+            return ringpuffer.poll();
+        }
+    }
+
+    private ArrayList<T> elements;
+    private int writePos;
+    private int readPos;
+    private int size;
+    private int capacity;
+    private boolean fixedCpacity;
+    private boolean discarding;
 
     Ringpuffer(int m_capacity,boolean m_fixedCpacity,boolean m_discarding){
         this.capacity = m_capacity;
@@ -24,6 +41,17 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
         elements = new ArrayList<T>();
     }
+
+    Ringpuffer(Ringpuffer<T> puffer){
+        this.capacity = puffer.capacity;
+        this.fixedCpacity = puffer.fixedCpacity;
+        this.discarding = puffer.discarding;
+
+        elements = (ArrayList<T>) puffer.elements.clone();
+        this.writePos = puffer.writePos;
+        this.readPos = puffer.readPos;
+        this.size = puffer.size;
+    }
     @Override
     public int size() {
         return size;
@@ -31,36 +59,37 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
     @Override
     public boolean isEmpty() {
-
-        return false;
+        return (capacity < 1 || elements == null) ? true : false;
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        Objects.requireNonNull(o);
+        //ueberprueft ob o ein object ist, wenn ja wird es true zuruecjgegeben, wenn nicht fales.
+        return elements.contains(o);
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return RingpufferInterator<>(this, false);
     }
 
     @Override
     public Object[] toArray() {
         ArrayList list = new ArrayList();
-		for (Iterator iterator = iterator(); iterator.hasNext(); ) {
-			list.add(iterator.next());
-		}
-		return list.toArray();
+        for(Iterator i = iterator(); i.hasNext(); ){
+            list.add(i.next());
+        }
+        return list.toArray();
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
         ArrayList<T> list = new ArrayList<>();
-		for (Iterator<T> iterator = iterator(); iterator.hasNext(); ) {
-			list.add(iterator.next());
-		}
-		return list.toArray(a);
+        for(Iterator<T> i = iterator(); i.hasNext();){
+            list.add(i.next());
+        }
+        return list.toArray(a);
     }
 
     @Override
@@ -121,5 +150,11 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
     @Override
     public T peek() {
         return null;
+    }
+
+
+    @Override
+    protected Objects clone(){
+        return new Ringpuffer<T>(this);
     }
 }
