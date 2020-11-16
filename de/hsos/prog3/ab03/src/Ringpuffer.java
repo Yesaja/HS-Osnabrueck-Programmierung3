@@ -47,12 +47,20 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        ArrayList list = new ArrayList();
+		for (Iterator iterator = iterator(); iterator.hasNext(); ) {
+			list.add(iterator.next());
+		}
+		return list.toArray();
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        ArrayList<T> list = new ArrayList<>();
+		for (Iterator<T> iterator = iterator(); iterator.hasNext(); ) {
+			list.add(iterator.next());
+		}
+		return list.toArray(a);
     }
 
     @Override
@@ -115,4 +123,3 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
         return null;
     }
 }
-// write your code here
