@@ -3,7 +3,8 @@
  * falschen Eingaben "Standardwerte" zur&uuml;ck.
  * @author kleuker
  */
-package de.hsos.prog3.freinhar.ab03;
+package de.hsos.prog3.ab03.src;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

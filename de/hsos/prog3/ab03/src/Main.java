@@ -1,6 +1,6 @@
-package de.hsos.prog3.freinhar.ab03;
+package de.hsos.prog3.ab03.src;
 
-
+/*
 import java.util.*;
 import java.io.Serializable;
 import java.util.*;
@@ -8,13 +8,14 @@ import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+*/
 
 public class Main {
 
     public static void main(String[] args) {
 
         Ringpuffer<String> FiFo = new Ringpuffer<>();
-        String s = "INIT";
+        //String s = "INIT";
         //FiFo.
         String a = "Object_1";
         String b = "Object_2";
@@ -40,7 +41,7 @@ public class Main {
         System.out.println("Ringpuffer-Funktion: Peek() " + FiFo.peek());
         System.out.println("Elements "+FiFo.toString() + "\n");
 
-        String neu = "neuerString";
+        //String neu = "neuerString";
 
         System.out.println("Ringpuffer-Funktion: Element() " + FiFo.element());
         System.out.println("Elements "+FiFo.toString() + "\n");

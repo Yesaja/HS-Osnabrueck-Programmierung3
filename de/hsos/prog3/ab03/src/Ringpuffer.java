@@ -1,4 +1,4 @@
-package de.hsos.prog3.freinhar.ab03;
+package de.hsos.prog3.ab03.src;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -214,12 +214,12 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
                 System.out.println("Es werden keine weiteren Elemente mehr hinzugefügt. Möchten sie dies ändern? Dann wiederholen sie bitte die Initialisierung:(Y)/(N)");
                 char answer = input.leseString().charAt(0);
                 switch (answer) {
-                    case 'Y', 'y':
+                    case 'y':
                         System.out.println("Die erneute Initialisierung beginnt");
                         initialize(capacity);
                         this.add(t);
                         break;
-                    case 'N', 'n':
+                    case 'n':
                         System.out.println("Das Element wurde nicht hinzugefügt");
                         break;
                 }
