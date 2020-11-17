@@ -1,7 +1,7 @@
 package de.hsos.prog3.ab03.src;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.*;
 
 public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
