@@ -1,404 +1,353 @@
-package de.hsos.prog3.ab03.src;
+package de.hsos.prog3.freinhar.ab03;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class Ringpuffer<T> implements Deque<T>, RandomAccess, Serializable, Cloneable {
+public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
-	// Probleme mit add sonst vollständig
+    ArrayList<T> elements;
+    private int writePos = 0;
+    private int readPos = 0;
+    private int size;
+    private int capacity;
+    private boolean fixedCapacity;
+    private boolean discarding;
+    private int factor;
 
-	private static final double EXPANSION_FACTOR = 1.5;
+    Ringpuffer() {
+        this.capacity = initialize(0);
+        elements = new ArrayList<T>(capacity);
+    }
 
-	private static class RingpufferIterator<E> implements Iterator<E> {
+    //User defines the capacity of the Ring Buffer
+    private int initialize(int min) {
+        EinUndAusgabe input = new EinUndAusgabe();
+        do {
 
-		Ringpuffer<E> ringpuffer;
-		boolean pollFirst;
+            System.out.print("Bitte gib die maximale Kapazität ein: ");
+            capacity = input.leseInteger();
+        } while (capacity < min + 1);
+        if (!discarding && fixedCapacity) {
+            writePos -= capacity - min;
+        }
+        System.out.println("Die maximale Anzahl der Elemente im Ringpuffer beträgt " + capacity + "\n");
 
-		public RingpufferIterator(Ringpuffer<E> ringpuffer, boolean pollFirst) {
-			this.ringpuffer = (Ringpuffer<E>) ringpuffer.clone();
-			this.pollFirst = pollFirst;
-		}
+        System.out.println("Wie soll sich der Ringpuffer verhalten, wenn es zu einem Überlauf kommt?");
+        int prompt;
+        do {
+            System.out.println("Bitte wählen Sie eine der folgenden Optionen für zukünftige Elemente aus:\n");
 
-		@Override
-		public boolean hasNext() {
-			return !ringpuffer.isEmpty();
-		}
+            System.out.println("(1) Das älteste Element im Speicher wird überschrieben");
+            System.out.println("(2) Die Kapazität wird um einen Faktor erhöht");
+            System.out.println("(3) Es werden keine neuen Elemente mehr hinzugefügt");
+            prompt = input.leseInteger();
+        } while (prompt != 1 && prompt != 2 && prompt != 3);
 
-		@Override
-		public E next() {
-			if (pollFirst) {
-				return ringpuffer.pollFirst();
-			} else {
-				return ringpuffer.pollLast();
-			}
-		}
-	}
+        switch (prompt) {
+            case 1:
+                //Elemente dürfen überschrieben werden, Ringpuffer bleibt statisch
+                discarding = true;
+                fixedCapacity = true;
+                System.out.println("Zukünftige Elemente werden in Abhängigkeit von der Aktualität überschrieben\n");
+                break;
+            case 2:
+                //Der Ringpuffer wird erweitert, Elemente werden nicht überschrieben
+                discarding = false;
+                fixedCapacity = false;
+                System.out.println("Bitte geben sie den Faktor an, um den der Ringpuffer vergrößert werden soll:");
+                factor = input.leseInteger();
+                System.out.println("Der Ringpuffer wird bei Überläufen um den Faktor " + factor + " erweitert\n");
+                break;
+            case 3:
+                //Es dürfen keine Elemente mehr hinzugefügt werden
+                discarding = false;
+                fixedCapacity = true;
+                System.out.println("Es werden keine Elemente mehr hinzugefügt\n");
+                break;
+            default:
+                break;
+        }
 
-	private ArrayList<T> elements;
-	private int head;
-	private int tail;
-	private int size;
-	private int capacity;
-	private boolean fixedCapacity;
-	private boolean discarding;
+        return capacity;
+    }
 
-	public Ringpuffer(int capacity, boolean fixedCapacity, boolean discarding) {
-		this.capacity = capacity;
-		this.fixedCapacity = fixedCapacity;
-		this.discarding = discarding;
-		clear();
-	}
+    private void setCapacity(int capacity) {
+        if (!fixedCapacity) {
+            this.capacity = capacity;
+        }
+    }
 
-	private Ringpuffer(Ringpuffer<T> source) {
-		capacity = source.capacity;
-		fixedCapacity = source.fixedCapacity;
-		discarding = source.discarding;
+    public void incrementWritePos() {
+        if (inRange(writePos + 1)) {
+            this.writePos = writePos + 1;
+        } else {
+            //Überlauf des Schreibzeigers
+            this.writePos = 0;
+        }
+    }
 
-		elements = (ArrayList<T>) source.elements.clone();
-		head = source.head;
-		tail = source.tail;
-		size = source.size;
-	}
+    public void decrementWritePos() {
+        if (inRange(writePos - 1)) {
+            this.writePos = writePos - 1;
+        } else {
+            //Überlauf des Schreibzeigers
+            this.writePos = capacity - 1;
+        }
+    }
 
-	private void fill() {
-		while (elements.size() < capacity) {
-			elements.add(null);
-		}
-	}
+    public void incrementReadPos() {
+        if (inRange(readPos + 1)) {
+            this.readPos = readPos + 1;
+        } else {
+            //Überlauf des Lesezeigers
+            this.readPos = 0;
+        }
+    }
 
-	@Override
-	public void addFirst(T t) {
-		if (!offerFirst(t)) {
-			throw new IllegalStateException();
-		}
-	}
+    public boolean inRange(int position) {
+        //Incrementing the Counter needs to reset it
+        if (0 == (position % capacity)) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public void addLast(T t) {
-		if (!offerLast(t)) {
-			throw new IllegalStateException();
-		}
-	}
+    public void setSize(int size) {
+        this.size = size;
+    }
 
-	@Override
-	public boolean offerFirst(T t) {
-		Objects.requireNonNull(t);
+    public void setFixedCapacity(boolean fixedCapacity) {
+        this.fixedCapacity = fixedCapacity;
+    }
 
-		if (size >= capacity) {
-			if (discarding) {
-				// Ersetzen
-				elements.set(head, t);
-				head = (head + 1) % capacity;
-				return true;
-			} else {
-				if (fixedCapacity) {
-					// Abbruch
-					return false;
-				} else {
-					// Vergrößern
-					int diff = -capacity;
-					capacity = (int) (capacity * EXPANSION_FACTOR);
-					diff += capacity;
-					fill();
-					head = (capacity + head - diff) % capacity;
-				}
-			}
-		}
+    public void setDiscarding(boolean discarding) {
+        this.discarding = discarding;
+    }
 
-		// Hinzufügen
-		elements.set(head, t);
-		head = (head + 1) % capacity;
-		size++;
+    public int getCapacity() {
+        return this.capacity;
+    }
 
-		return true;
-	}
+    @Override
+    public int size() {
+        return size;
+    }
 
-	@Override
-	public boolean offerLast(T t) {
-		Objects.requireNonNull(t);
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-		if (size >= capacity) {
-			if (discarding) {
-				// Hinzufügen
-				elements.add(tail, t);
-				// Entfernen
-				elements.remove(head + 1);
-				head = (head + 1) % capacity;
-				return true;
-			} else {
-				if (fixedCapacity) {
-					// Abbruch
-					return false;
-				} else {
-					// Vergrößern
-					int diff = -capacity;
-					capacity = (int) (capacity * EXPANSION_FACTOR);
-					diff += capacity;
-					fill();
-					head = (capacity + head - diff) % capacity;
-				}
-			}
-		}
+    @Override
+    public boolean contains(Object o) {
+        //Lesezeiger ist vor Schreibzeiger
+        if (writePos < readPos) {
+            //Durchlaufen der rechten Hälfte
+            for (int i = readPos; i < capacity - 1; i++) {
+                if (elements.equals(o)) {
+                    return true;
+                }
+            }
+            //Durchlaufen der rechten Hälfte
+            for (int i = 0; i < writePos; i++) {
+                if (elements.equals(o)) {
+                    return true;
+                }
+            }
+            //Schreibzeiger ist vor Lesezeiger
+        } else {
+            for (int i = 0; i < writePos; i++) {
+                if (elements.equals(o)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-		// Hinzufügen
-		elements.set(tail, t);
-		head = (head + 1) % capacity;
-		size++;
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
 
-		return true;
-	}
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
 
-	@Override
-	public T removeFirst() {
-		T t = pollFirst();
-		if (t != null) {
-			return t;
-		} else {
-			throw new NoSuchElementException();
-		}
-	}
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        return null;
+    }
 
-	@Override
-	public T removeLast() {
-		T t = pollLast();
-		if (t != null) {
-			return t;
-		} else {
-			throw new NoSuchElementException();
-		}
-	}
 
-	@Override
-	public T pollFirst() {
-		if (size > 0) {
-			T t = peekFirst();
-			tail = (tail + 1) % capacity;
-			size--;
-			return t;
-		} else {
-			return null;
-		}
-	}
+    @Override
+    public String toString() {
+        return elements.toString();
+    }
 
-	@Override
-	public T pollLast() {
-		if (size > 0) {
-			T t = peekLast();
-			// Ordnung wieder herstellen??
-			tail = (tail + 1) % capacity;
-			size--;
-			return t;
-		} else {
-			return null;
-		}
-	}
+    @Override
+    public boolean add(T t) {
+        EinUndAusgabe input = new EinUndAusgabe();
+        //Kapazität ist ausgeschoepft
+        if (size == capacity) {
+            System.out.println("Der Ringpuffer ist voll");
+            //Elemente überschreiben
+            if (discarding && fixedCapacity) {
+                System.out.println("Vorhandene Elemente werden basierend auf Ihrer Aktualität überschrieben");
+                elements.set(writePos, t);
+                if (readPos == writePos) {
+                    incrementReadPos();
+                }
+                incrementWritePos();
 
-	@Override
-	public T getFirst() {
-		T t = pollFirst();
-		if (t != null) {
-			return t;
-		} else {
-			throw new NoSuchElementException();
-		}
-	}
+                //Ringpuffer wird erweitert
+            } else if (!discarding && !fixedCapacity) {
+                System.out.println("Die Kapazität des Ringpuffers wird um " + factor + " Stelle(n) erweitert\n");
+                setCapacity(capacity + factor);
+                //writePos = capacity;
+                this.add(t);
 
-	@Override
-	public T getLast() {
-		T t = pollLast();
-		if (t != null) {
-			return t;
-		} else {
-			throw new NoSuchElementException();
-		}
-	}
+                //Es werden keine Elemente mehr hinzugefügt
+            } else if (!discarding && fixedCapacity) {
+                System.out.println("Es werden keine weiteren Elemente mehr hinzugefügt. Möchten sie dies ändern? Dann wiederholen sie bitte die Initialisierung:(Y)/(N)");
+                char answer = input.leseString().charAt(0);
+                switch (answer) {
+                    case 'Y', 'y':
+                        System.out.println("Die erneute Initialisierung beginnt");
+                        initialize(capacity);
+                        this.add(t);
+                        break;
+                    case 'N', 'n':
+                        System.out.println("Das Element wurde nicht hinzugefügt");
+                        break;
+                }
+            }
+            return false;
+        } else {
+            //Es ist noch Kapazität vorhanden. Size < Capacity
+            elements.add(t);
+            System.out.println("Das Element " + t.toString() + " wurde erfolgreich hinzugefügt.");
+            //Erhöhen der eigentlichen Elemente und Schreibposition
+            incrementWritePos();
+            size++;
+            return true;
+        }
+    }
 
-	@Override
-	public T peekFirst() {
-		if (size > 0) {
-			return elements.get(tail);
-		} else {
-			return null;
-		}
-	}
+    private void fillRingBuffer(T t) {
+        for (int i = 0; i < capacity; i++) {
+            elements.add(t);
+        }
+    }
 
-	@Override
-	public T peekLast() {
-		if (size > 0) {
-			return elements.get((size + head - 1) % capacity);
-		} else {
-			return null;
-		}
-	}
+    public int getWritePos() {
+        return writePos;
+    }
 
-	@Override
-	public boolean removeFirstOccurrence(Object o) {
-		Objects.requireNonNull(o);
+    public int getReadPos() {
+        return readPos;
+    }
 
-		int index = tail;
-		while (index != head) {
-			if (elements.get(index) == o) {
-				elements.set(index, null);
-				size--;
-				return true;
-			}
-			index = (index + 1) % capacity;
-		}
-		return false;
-	}
+    //Methode nicht implementiert, da Ringpuffer keine "Lücken" zulässt
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
 
-	@Override
-	public boolean removeLastOccurrence(Object o) {
-		Objects.requireNonNull(o);
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
 
-		int index = tail;
-		while (index != head) {
-			if (elements.get(index) == o) {
-				elements.set(index, null);
-				size--;
-				return true;
-			}
-			index = (size + index - 1) % capacity;
-		}
-		return false;
-	}
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        for (T t : c) {
+            this.add(t);
+        }
+        return true;
+    }
 
-	@Override
-	public boolean add(T t) {
-		if (offer(t)) {
-			return true;
-		} else {
-			throw new IllegalStateException();
-		}
-	}
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
 
-	@Override
-	public boolean offer(T t) {
-		return offerFirst(t);
-	}
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
 
-	@Override
-	public T remove() {
-		return removeFirst();
-	}
+    //removes all elements
+    @Override
+    public void clear() {
+        for (int i = 0; i < capacity - size - 1; i++) {
+            elements.remove(i);
+        }
+    }
 
-	@Override
-	public T poll() {
-		return pollFirst();
-	}
+    @Override
+    public boolean offer(T t) {
+        return false;
+    }
 
-	@Override
-	public T element() {
-		return getFirst();
-	}
+    /**
+     * @Removes Head Object by decrementing the write position
+     * Objects are not "removed", but marked to be overwritten
+     */
 
-	@Override
-	public T peek() {
-		return peekFirst();
-	}
+    @Override
+    public T remove() throws NoSuchElementException {
+        if (size > 0) {
+            return obliterate();
+        }
+        throw new NoSuchElementException("Der Ringpuffer ist leer");
+    }
 
-	@Override
-	public void push(T t) {
-		addFirst(t);
-	}
+    /**
+     * Retrieves and removes the head of the Ringbuffer
+     */
+    @Override
+    public T poll() {
+        if (size > 0) {
+            return obliterate();
+        }
+        return null;
+    }
 
-	@Override
-	public T pop() {
-		return removeFirst();
-	}
+    /**
+     * Retrieves the head of the Ringbuffer
+     * Throws Exception
+     */
+    @Override
+    public T element() throws NoSuchElementException {
+        if (size > 0) {
+            T temp = elements.get(readPos);
+            return temp;
+        }
+        throw new NoSuchElementException("Der Ringpuffer ist leer");
+    }
 
-	@Override
-	public boolean remove(Object o) {
-		return removeFirstOccurrence(o);
-	}
+    /**
+     * Retrieves the head of the Ringbuffer
+     */
+    @Override
+    public T peek() {
+        if (size > 0) {
+            T temp = elements.get(readPos);
+            return temp;
+        }
+        return null;
+    }
 
-	@Override
-	public boolean containsAll(Collection<?> c) {
-		Objects.requireNonNull(c);
-
-		return c.parallelStream().allMatch(o -> contains(o));
-	}
-
-	@Override
-	public boolean addAll(Collection<? extends T> c) {
-		Objects.requireNonNull(c);
-
-		return c.stream().anyMatch(o -> add(o));
-	}
-
-	@Override
-	public boolean removeAll(Collection<?> c) {
-		Objects.requireNonNull(c);
-
-		return c.stream().anyMatch(o -> remove(o));
-	}
-
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		Objects.requireNonNull(c);
-
-		Collection<?> difference = c.parallelStream().filter(o -> !contains(o)).collect(Collectors.toCollection(ArrayList::new));
-		return removeAll(difference);
-	}
-
-	@Override
-	public void clear() {
-		elements = new ArrayList<>();
-		fill();
-
-		head = 0;
-		tail = 0;
-		size = 0;
-	}
-
-	@Override
-	public boolean contains(Object o) {
-		Objects.requireNonNull(o);
-
-		return elements.contains(o);
-	}
-
-	@Override
-	public int size() {
-		return size;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return size == 0;
-	}
-
-	@Override
-	public Iterator<T> iterator() {
-		return new RingpufferIterator<>(this, true);
-	}
-
-	@Override
-	public Iterator<T> descendingIterator() {
-		return new RingpufferIterator<>(this, false);
-	}
-
-	@Override
-	public Object[] toArray() {
-		ArrayList list = new ArrayList();
-		for (Iterator iter = iterator(); iter.hasNext(); ) {
-			list.add(iter.next());
-		}
-		return list.toArray();
-	}
-
-	@Override
-	public <E> E[] toArray(E[] a) {
-		ArrayList<T> list = new ArrayList<>();
-		for (Iterator<T> iter = iterator(); iter.hasNext(); ) {
-			list.add(iter.next());
-		}
-		return list.toArray(a);
-	}
-
-	@Override
-	protected Object clone() {
-		return new Ringpuffer<T>(this);
-	}
+    private T obliterate() {
+        T temp = elements.get(readPos);
+        elements.remove(readPos);
+        if (!(readPos == 0)) {
+            incrementReadPos();
+        }
+        size--;
+        return temp;
+    }
 }
