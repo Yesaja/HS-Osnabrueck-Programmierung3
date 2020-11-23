@@ -1,4 +1,4 @@
-package de.hsos.prog3.ab04.ab04_1;
+package de.hsos.prog3.ab04.basketball;
 
 public interface Listener {
     public boolean mitMausVerschoben(String name, int x, int y);

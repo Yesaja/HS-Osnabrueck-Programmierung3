@@ -1,4 +1,4 @@
-package de.hsos.prog3.ab04.ab04_1;
+package de.hsos.prog3.ab04.basketball;
 
 import de.hsos.prog3.ab04.util.Interaktionsbrett;
 
