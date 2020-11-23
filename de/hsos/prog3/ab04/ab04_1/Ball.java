@@ -1,0 +1,41 @@
+package de.hsos.prog3.ab04.ab04_1;
+
+import de.hsos.prog3.ab04.util.Interaktionsbrett;
+
+public class Ball implements Listener {
+    
+    private int x, y, radius;
+    private String name = "ball";
+
+    public Ball(Interaktionsbrett ib) {
+        this.x = ib.zufall(20,20);
+        this.y = ib.zufall(20,20);
+        this.radius = 10;
+    }
+
+    public void darstellen(Interaktionsbrett ib) {
+        ib.neuerKreis(this,this.name,this.getX(),this.getY(),this.radius);
+    }
+
+    @Override
+    public boolean mitMausVerschoben(String name, int x, int y) {
+        return true;
+    }
+
+    @Override
+    public boolean mitMausAngeklickt(String name, int x, int y) {
+        System.out.println("Angeklickt.");
+        return true;
+    }
+
+    @Override
+    public boolean mitMausLosgelassen(String name, int x, int y) {
+        System.out.println("Losgelassen.");
+        this.x = x;
+        this.y = y;
+        return true;
+    }
+
+    public int getX() {return this.x;}
+    public int getY() {return this.y;}
+}
