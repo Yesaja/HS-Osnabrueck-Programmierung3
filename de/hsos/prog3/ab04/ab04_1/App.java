@@ -8,7 +8,7 @@ public class App {
         
         int i = 0;
         Interaktionsbrett spielfeld = new Interaktionsbrett();
-        EinUndAusgabe io = new EinUndAusgabe();
+        //EinUndAusgabe io = new EinUndAusgabe();
 
 
         while(i < 3) {
