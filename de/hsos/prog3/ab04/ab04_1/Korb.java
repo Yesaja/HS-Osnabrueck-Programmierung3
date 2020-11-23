@@ -13,15 +13,14 @@ public class Korb {
     }
 
     public void darstellen(Interaktionsbrett ib) {
-        ib.neuesRechteck(this.x,this.y,this.seite,this.seite);
+        ib.neuesRechteck(x,y,seite,seite);
     }
 
     public boolean getroffen(Ball ball) {
-        if( ball.getX() >= this.x + ball.getRadius() &&
-            ball.getX() <= this.x + this.seite - ball.getRadius() &&
-            ball.getY() >= this.y + ball.getRadius() &&
-            ball.getY() <= this.y + this.seite - ball.getRadius()) {
-            return true;
+        if(ball.getX() - ball.getRadius() > this.x && ball.getX() + ball.getRadius() < this.x + this.seite) {
+            if(ball.getY() - ball.getRadius() > this.y && ball.getY() + ball.getRadius() < this.y + this.seite) {
+                return true;
+            }
         }
         return false;
     }

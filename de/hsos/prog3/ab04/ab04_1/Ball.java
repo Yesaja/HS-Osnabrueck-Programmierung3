@@ -14,7 +14,7 @@ public class Ball implements Listener {
     }
 
     public void darstellen(Interaktionsbrett ib) {
-        ib.neuerKreis(this,this.name,this.getX(),this.getY(),this.radius);
+        ib.neuerKreis(this,name,this.getX(),this.getY(),this.getRadius());
     }
 
     @Override
