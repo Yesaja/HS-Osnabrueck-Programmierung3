@@ -18,7 +18,12 @@ public class App {
         while(true) {
             if(korb.getroffen(ball)) {
                 System.out.println("Treffer!");
-                spielfeld.stoppeUhr();
+            } else {
+                try {
+                    Thread.sleep(100);
+                } catch (Exception e) {
+    
+                }
             }
         }
     }

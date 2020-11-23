@@ -7,27 +7,22 @@ public class Korb {
     private int x, y, seite;
 
     public Korb(Interaktionsbrett ib) {
-        this.x = ib.zufall(10,20);
-        this.y = ib.zufall(10,20);
+        this.x = ib.zufall(10,200);
+        this.y = ib.zufall(10,200);
         this.seite = 50;
     }
 
     public void darstellen(Interaktionsbrett ib) {
-        ib.neuesRechteck(this.getX(),this.getY(),this.getSeite(),this.getSeite());
+        ib.neuesRechteck(this.x,this.y,this.seite,this.seite);
     }
 
     public boolean getroffen(Ball ball) {
-        if( ball.getX() >= this.getX() &&
-            ball.getX() <= (this.getX() + this.seite) &&
-            ball.getY() >= this.getY() &&
-            ball.getY() <= (this.getY() + this.seite)) {
+        if( ball.getX() >= this.x + ball.getRadius() &&
+            ball.getX() <= this.x + this.seite - ball.getRadius() &&
+            ball.getY() >= this.y + ball.getRadius() &&
+            ball.getY() <= this.y + this.seite - ball.getRadius()) {
             return true;
         }
         return false;
     }
-
-    public int getX() {return this.x;}
-    public int getY() {return this.y;}
-    public int getSeite() {return this.seite;}
-
 }

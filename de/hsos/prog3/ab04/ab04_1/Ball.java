@@ -8,8 +8,8 @@ public class Ball implements Listener {
     private String name = "ball";
 
     public Ball(Interaktionsbrett ib) {
-        this.x = ib.zufall(20,20);
-        this.y = ib.zufall(20,20);
+        this.x = ib.zufall(10,200);
+        this.y = ib.zufall(10,200);
         this.radius = 10;
     }
 
@@ -24,13 +24,13 @@ public class Ball implements Listener {
 
     @Override
     public boolean mitMausAngeklickt(String name, int x, int y) {
-        System.out.println("Angeklickt.");
+        //System.out.println("Angeklickt.");
         return true;
     }
 
     @Override
     public boolean mitMausLosgelassen(String name, int x, int y) {
-        System.out.println("Losgelassen.");
+        //System.out.println("Losgelassen.");
         this.x = x;
         this.y = y;
         return true;
@@ -38,4 +38,5 @@ public class Ball implements Listener {
 
     public int getX() {return this.x;}
     public int getY() {return this.y;}
+    public int getRadius() {return this.radius;}
 }
