@@ -1,6 +1,5 @@
 package de.hsos.prog3.ab04.basketball;
 
-import ab02.util.EinUndAusgabe;
 import de.hsos.prog3.ab04.util.Interaktionsbrett;
 
 public class App {
@@ -8,8 +7,6 @@ public class App {
         
         int i = 0;
         Interaktionsbrett spielfeld = new Interaktionsbrett();
-        //EinUndAusgabe io = new EinUndAusgabe();
-
 
         while(i < 3) {
             try {
