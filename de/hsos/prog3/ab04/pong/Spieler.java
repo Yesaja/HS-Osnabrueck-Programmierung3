@@ -36,6 +36,10 @@ public class Spieler {
         return this.schlaeger;
     }
 
+    public int getPunkte() {
+        return this.punkte;
+    }
+
     public void darstellen(Interaktionsbrett ib) {
         ib.neuesRechteck(this.getSchlaeger().links(), this.getSchlaeger().oben(), this.getSchlaeger().breite(), this.getSchlaeger().hoehe());
         for(int i = this.getSchlaeger().links(); i < this.getSchlaeger().rechts(); i++) {

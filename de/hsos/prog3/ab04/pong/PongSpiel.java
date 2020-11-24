@@ -44,6 +44,8 @@ public class PongSpiel {
             spielerRechts.darstellen(ib);
 
             //4. Aktueller Spielstand
+            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() - 100, spielfeld.spielfeldflaeche.oben() + spielfeld.spielfeldflaeche.hoehe()+30, "Punktzahl: " + spielerLinks.getPunkte() + "");
+            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() + 100, spielfeld.spielfeldflaeche.oben() + spielfeld.spielfeldflaeche.hoehe()+30, spielerRechts.getPunkte() + "");
 
             //5. Ball bewegen
             ball.darstellen(ib);
@@ -77,8 +79,8 @@ public class PongSpiel {
                             break;
             case "m":       spielerRechts.abwaerts();
                             break;
-            case "s":       spielen();
-                            break;
+            /*case "s":       spielen();
+                            break;*/
             case "e":       System.exit(0);
         }
     }
