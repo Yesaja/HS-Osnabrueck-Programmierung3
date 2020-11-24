@@ -44,8 +44,8 @@ public class PongSpiel {
             spielerRechts.darstellen(ib);
 
             //4. Aktueller Spielstand
-            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() - 100, spielfeld.spielfeldflaeche.oben() + spielfeld.spielfeldflaeche.hoehe()+30, "Punktzahl: " + spielerLinks.getPunkte() + "");
-            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() + 100, spielfeld.spielfeldflaeche.oben() + spielfeld.spielfeldflaeche.hoehe()+30, spielerRechts.getPunkte() + "");
+            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() - 100, spielfeld.spielfeldflaeche.oben() + 20, spielerLinks.getPunkte() + "");
+            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() + 100, spielfeld.spielfeldflaeche.oben() + 20, spielerRechts.getPunkte() + "");
 
             //5. Ball bewegen
             ball.darstellen(ib);
@@ -59,12 +59,13 @@ public class PongSpiel {
             if(posi == BallPosition.DRAUSSEN_LINKS) {
                 spielerRechts.erhoehePunkte();
                 ball.umkehrenDerBewegungInX();
-                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.links() + 30,spielfeld.spielfeldflaeche.mitteInY());
+                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.links() + 20,spielfeld.spielfeldflaeche.mitteInY());
             }
+
             if(posi == BallPosition.DRAUSSEN_RECHTS) {
                 spielerLinks.erhoehePunkte();
                 ball.umkehrenDerBewegungInX();
-                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.rechts() - 80,spielfeld.spielfeldflaeche.mitteInY());
+                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.rechts() - 20,spielfeld.spielfeldflaeche.mitteInY());
             }
         }
     }
@@ -75,14 +76,13 @@ public class PongSpiel {
                             break;
             case "y":       spielerLinks.abwaerts();
                             break;
-            case "j":       spielerRechts.aufwaerts();
+            case "Oben":    spielerRechts.aufwaerts();
                             break;
-            case "m":       spielerRechts.abwaerts();
+            case "Unten":   spielerRechts.abwaerts();
                             break;
-            /*case "s":       spielen();
+            /*case "s":     spielen();
                             break;*/
             case "e":       System.exit(0);
         }
     }
-
 }
