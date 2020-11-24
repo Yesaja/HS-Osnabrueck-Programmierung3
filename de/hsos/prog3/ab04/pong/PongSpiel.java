@@ -1,5 +1,6 @@
 package de.hsos.prog3.ab04.pong;
 
+import de.hsos.prog3.ab04.pong.KollisionsDetektor.BallPosition;
 import de.hsos.prog3.ab04.pong.util.Interaktionsbrett;
 
 public class PongSpiel {
@@ -9,6 +10,7 @@ public class PongSpiel {
     private Spieler spielerLinks;
     private Spieler spielerRechts;
     private Ball ball;
+    private KollisionsDetektor detektor;
 
     public final int FPMS = 17;
 
@@ -23,6 +25,7 @@ public class PongSpiel {
         this.spielerLinks = new Spieler(spielfeld, spielfeld.spielfeldflaeche.links() + 5, spielfeld.spielfeldflaeche.mitteInY() - 5);
         this.spielerRechts = new Spieler(spielfeld, spielfeld.spielfeldflaeche.rechts() - 12, spielfeld.spielfeldflaeche.mitteInY() - 5);
         this.ball = new Ball(new Rechteck(60,60,6,6),4,1);
+        this.detektor = new KollisionsDetektor(spielfeld,spielerLinks,spielerRechts);
     }
 
     public void spielen() throws Exception {
@@ -42,8 +45,25 @@ public class PongSpiel {
 
             //4. Aktueller Spielstand
 
+            //5. Ball bewegen
             ball.darstellen(ib);
             ball.bewegen(FPMS);
+            
+            //6. Detektor
+            detektor.checkBeruehrungBallMitSchlaeger(ball);
+            detektor.checkBeruehrungBallSpielfeldGrenzen(ball);
+            
+            BallPosition posi = detektor.checkAusserhalbDesSpielfeleds(ball);
+            if(posi == BallPosition.DRAUSSEN_LINKS) {
+                spielerRechts.erhoehePunkte();
+                ball.umkehrenDerBewegungInX();
+                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.links() + 30,spielfeld.spielfeldflaeche.mitteInY());
+            }
+            if(posi == BallPosition.DRAUSSEN_RECHTS) {
+                spielerLinks.erhoehePunkte();
+                ball.umkehrenDerBewegungInX();
+                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.rechts() - 80,spielfeld.spielfeldflaeche.mitteInY());
+            }
         }
     }
 

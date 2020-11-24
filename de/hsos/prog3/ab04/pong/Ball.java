@@ -32,4 +32,8 @@ public class Ball {
         }
     }
 
+    public Rechteck getForm() {
+        return this.form;
+    }
+
 }

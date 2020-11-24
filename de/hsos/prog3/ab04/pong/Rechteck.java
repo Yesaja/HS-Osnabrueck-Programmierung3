@@ -57,11 +57,11 @@ public class Rechteck {
     }
 
     public boolean ueberschneidet(Rechteck rechteck) {
-        if(this.oben() < rechteck.unten() || this.unten() > rechteck.oben()) {
+        if(this.oben() > rechteck.unten() || this.unten() < rechteck.oben()) {
             return false;
         }
             
-        if(this.oben() < rechteck.unten() || this.unten() > rechteck.oben()) {
+        if(this.rechts() < rechteck.links() || this.links() > rechteck.rechts()) {
             return false;
         }
         return true;
