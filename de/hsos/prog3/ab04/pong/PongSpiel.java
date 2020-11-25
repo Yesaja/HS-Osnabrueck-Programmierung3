@@ -22,8 +22,8 @@ public class PongSpiel {
 
     private void startAufstellung() {
         this.spielfeld = new Spielfeld();
-        this.spielerLinks = new Spieler(spielfeld, spielfeld.spielfeldflaeche.links() + 5, spielfeld.spielfeldflaeche.mitteInY() - 5);
-        this.spielerRechts = new Spieler(spielfeld, spielfeld.spielfeldflaeche.rechts() - 12, spielfeld.spielfeldflaeche.mitteInY() - 5);
+        this.spielerLinks = new Spieler(spielfeld, spielfeld.getSpielfeld().links() + 5, spielfeld.getSpielfeld().mitteInY() - 5);
+        this.spielerRechts = new Spieler(spielfeld, spielfeld.getSpielfeld().rechts() - 12, spielfeld.getSpielfeld().mitteInY() - 5);
         this.ball = new Ball(new Rechteck(60,60,6,6),4,1);
         this.detektor = new KollisionsDetektor(spielfeld,spielerLinks,spielerRechts);
     }
@@ -44,8 +44,8 @@ public class PongSpiel {
             spielerRechts.darstellen(ib);
 
             //4. Aktueller Spielstand
-            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() - 100, spielfeld.spielfeldflaeche.oben() + 20, spielerLinks.getPunkte() + "");
-            ib.neuerText(spielfeld.spielfeldflaeche.mitteInX() + 100, spielfeld.spielfeldflaeche.oben() + 20, spielerRechts.getPunkte() + "");
+            ib.neuerText(spielfeld.getSpielfeld().mitteInX() - 100, spielfeld.getSpielfeld().oben() + 20, spielerLinks.getPunkte() + "");
+            ib.neuerText(spielfeld.getSpielfeld().mitteInX() + 100, spielfeld.getSpielfeld().oben() + 20, spielerRechts.getPunkte() + "");
 
             //5. Ball bewegen
             ball.darstellen(ib);
@@ -59,13 +59,13 @@ public class PongSpiel {
             if(posi == BallPosition.DRAUSSEN_LINKS) {
                 spielerRechts.erhoehePunkte();
                 ball.umkehrenDerBewegungInX();
-                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.links() + 20,spielfeld.spielfeldflaeche.mitteInY());
+                ball.getForm().verschiebeNach(spielfeld.getSpielfeld().links() + 20,spielfeld.getSpielfeld().mitteInY());
             }
 
             if(posi == BallPosition.DRAUSSEN_RECHTS) {
                 spielerLinks.erhoehePunkte();
                 ball.umkehrenDerBewegungInX();
-                ball.getForm().verschiebeNach(spielfeld.spielfeldflaeche.rechts() - 20,spielfeld.spielfeldflaeche.mitteInY());
+                ball.getForm().verschiebeNach(spielfeld.getSpielfeld().rechts() - 20,spielfeld.getSpielfeld().mitteInY());
             }
         }
     }

@@ -9,17 +9,17 @@ public class Spieler {
 
     public Spieler(Spielfeld spielfeld, int x, int y) {
         this.spielfeld = spielfeld;
-        this.schlaeger = new Rechteck(x,y,(spielfeld.spielfeldflaeche.hoehe() / 10), (spielfeld.spielfeldflaeche.breite() / 100));
+        this.schlaeger = new Rechteck(x,y,(spielfeld.getSpielfeld().hoehe() / 10), (spielfeld.getSpielfeld().breite() / 100));
     }
     
     public void aufwaerts() {
-        if(this.schlaeger.oben() > this.spielfeld.spielfeldflaeche.oben()) {
+        if(this.schlaeger.oben() > this.spielfeld.getSpielfeld().oben()) {
             this.schlaeger.verschiebe(0,-5);
         }
     }
 
     public void abwaerts() {
-        if(this.schlaeger.unten() < this.spielfeld.spielfeldflaeche.unten()) {
+        if(this.schlaeger.unten() < this.spielfeld.getSpielfeld().unten()) {
             this.schlaeger.verschiebe(0,5);;
         }
     }

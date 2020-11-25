@@ -31,7 +31,7 @@ public class KollisionsDetektor {
     }
 
     public void checkBeruehrungBallSpielfeldGrenzen(Ball ball) {
-        if(ball.getForm().oben() <= spielfeld.spielfeldflaeche.oben() || ball.getForm().unten() >= spielfeld.spielfeldflaeche.unten()) {
+        if(ball.getForm().oben() <= spielfeld.getSpielfeld().oben() || ball.getForm().unten() >= spielfeld.getSpielfeld().unten()) {
             ball.umkehrenDerBewegungInY();
         }
     }
@@ -43,11 +43,11 @@ public class KollisionsDetektor {
     }
 
     public BallPosition checkAusserhalbDesSpielfeleds(Ball ball) {
-        if(ball.getForm().rechts() < spielfeld.spielfeldflaeche.links()) {
+        if(ball.getForm().rechts() < spielfeld.getSpielfeld().links()) {
             return BallPosition.DRAUSSEN_LINKS;
         }
 
-        if(ball.getForm().links() > spielfeld.spielfeldflaeche.rechts()) {
+        if(ball.getForm().links() > spielfeld.getSpielfeld().rechts()) {
             return BallPosition.DRAUSSEN_RECHTS;
         }
         return BallPosition.DRINNEN;

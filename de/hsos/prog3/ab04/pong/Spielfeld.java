@@ -4,11 +4,14 @@ import de.hsos.prog3.ab04.pong.util.Interaktionsbrett;
 
 public class Spielfeld {
 
-    public Rechteck spielfeldflaeche;
-    public Spieler spieler;
+    private Rechteck spielfeldflaeche;
 
     public Spielfeld() {
         spielfeldflaeche = new Rechteck(5,5,620,775);
+    }
+
+    public Rechteck getSpielfeld() {
+        return this.spielfeldflaeche;
     }
 
     public void darstellen(Interaktionsbrett ib) {
