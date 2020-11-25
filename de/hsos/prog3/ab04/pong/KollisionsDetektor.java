@@ -1,6 +1,9 @@
 package de.hsos.prog3.ab04.pong;
 
+import java.util.Random;
+
 public class KollisionsDetektor {
+    private Random random;
     private Spielfeld spielfeld;
     private Spieler spielerLinks;
     private Spieler spielerRechts;
@@ -9,6 +12,7 @@ public class KollisionsDetektor {
     public KollisionsDetektor(Spielfeld spielfeld, Spieler spieler1, Spieler spieler2) {
         this.setSpielfeld(spielfeld);
         this.setSpieler(spieler1,spieler2);
+        this.random = new Random();
     }
 
     public void setSpielfeld(Spielfeld spielfeld) {
@@ -37,8 +41,14 @@ public class KollisionsDetektor {
     }
 
     public void checkBeruehrungBallMitSchlaeger(Ball ball) {
+        int seed = this.random.nextInt(100);
         if(spielerLinks.getSchlaeger().ueberschneidet(ball.getForm()) || spielerRechts.getSchlaeger().ueberschneidet(ball.getForm())) {
-            ball.umkehrenDerBewegungInX();
+            if(seed < 50) {
+                ball.umkehrenDerBewegungInX();
+            } else {
+                ball.umkehrenDerBewegungInX();
+                ball.umkehrenDerBewegungInY();
+            }
         }
     }
 
