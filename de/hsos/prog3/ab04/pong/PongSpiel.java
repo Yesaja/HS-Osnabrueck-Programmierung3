@@ -12,6 +12,8 @@ public class PongSpiel {
     private Ball ball;
     private KollisionsDetektor detektor;
 
+    private int margin = 100;
+
     public final int FPMS = 17;
 
     public PongSpiel() {
@@ -44,8 +46,8 @@ public class PongSpiel {
             spielerRechts.darstellen(ib);
 
             //4. Aktueller Spielstand
-            ib.neuerText(spielfeld.getSpielfeld().mitteInX() - 100, spielfeld.getSpielfeld().oben() + 20, spielerLinks.getPunkte() + "");
-            ib.neuerText(spielfeld.getSpielfeld().mitteInX() + 100, spielfeld.getSpielfeld().oben() + 20, spielerRechts.getPunkte() + "");
+            ib.neuerText(spielfeld.getSpielfeld().mitteInX() - margin, spielfeld.getSpielfeld().oben() + margin/5, spielerLinks.getPunkte() + "");
+            ib.neuerText(spielfeld.getSpielfeld().mitteInX() + margin, spielfeld.getSpielfeld().oben() + margin/5, spielerRechts.getPunkte() + "");
 
             //5. Ball bewegen
             ball.darstellen(ib);
